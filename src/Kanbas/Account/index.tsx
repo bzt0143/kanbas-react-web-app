@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from "react-router";
-import AccountNavigation from "../Navigation";
 import Profile from "./Profile";
 import Signin from "./Signin";
 import Signup from "./Signup";
