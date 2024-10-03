@@ -1,7 +1,7 @@
 import { FaPlus } from 'react-icons/fa';
 import { BsGripVertical } from 'react-icons/bs';
 import LessonControlButtons from '../Modules/LessonControlButtons';
-import { LiaBookSolid, LiaCogSolid } from 'react-icons/lia';
+import { LiaBookSolid} from 'react-icons/lia';
 
 export default function Assignments() {
   return (
@@ -86,7 +86,7 @@ export default function Assignments() {
               </div>
             </li>
 
-            {/* Assignments 2 */}
+            {/* Assignments 3 */}
             <li className='wd-lesson list-group-item p-3 ps-1 d-flex align-items-center'>
               <div className='d-flex flex-column justify-content-center me-3'>
                 <BsGripVertical className='fs-3' />

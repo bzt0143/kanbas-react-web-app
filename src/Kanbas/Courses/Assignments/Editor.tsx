@@ -157,8 +157,8 @@ export default function AssignmentEditor() {
           </div>
         </div>
       </div>
-  
-        {/* Assign and Due Dates */}
+
+      {/* Assign and Due Dates */}
       <div className='row mb-4'>
         <div className='col-md-6 row'>
           <label

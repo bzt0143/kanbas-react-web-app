@@ -2,7 +2,7 @@ import { AiOutlineDashboard } from 'react-icons/ai';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { LiaBookSolid, LiaCogSolid } from 'react-icons/lia';
 import { FaInbox, FaRegCircleUser } from 'react-icons/fa6';
-import { NavLink } from 'react-router-dom'; // Use NavLink instead of Link
+import { NavLink } from 'react-router-dom'; 
 
 export default function KanbasNavigation() {
   return (
@@ -14,6 +14,7 @@ export default function KanbasNavigation() {
       <a
         id='wd-neu-link'
         target='_blank'
+        rel='noopener noreferrer'
         href='https://www.northeastern.edu/'
         className='list-group-item bg-black border-0 text-center'
       >
@@ -45,7 +46,6 @@ export default function KanbasNavigation() {
         }
       >
         <AiOutlineDashboard className='fs-1 text-danger' />{' '}
-        {/* Keep icon red */}
         Dashboard
       </NavLink>
 
