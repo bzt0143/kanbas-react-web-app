@@ -1,130 +1,171 @@
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 export default function Dashboard() {
   return (
     <div id='wd-dashboard'>
       <h1 id='wd-dashboard-title'>Dashboard</h1> <hr />
-      <h2 id='wd-dashboard-published'>Published Courses (12)</h2> <hr />
-      <div id='wd-dashboard-courses'>
-        <div className='wd-dashboard-course'>
-          <img src='/images/reactjs.jpg' width={200} alt='React JS course' />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/1234/Home'
-            >
-              CS1234 React JS
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/1234/Home'> Go </Link>
+      <h2 id='wd-dashboard-published'>Published Courses (7)</h2> <hr />
+      {/* Bootstrap Grid*/}
+      <div id='wd-dashboard-courses' className='container'>
+        <div className='row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4'>
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/1234/Home'
+              >
+                <img
+                  src='/images/reactjs.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='React JS'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS1234 React JS</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <Link
+                  className='wd-dashboard-course-link'
+                  to='/Kanbas/Courses/1234/Home'
+                >
+                  <button className='btn btn-primary'>Go</button>
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/001/Home'
+              >
+                <img
+                  src='/images/oop.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='OOP'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>
+                    CS001 Object-Oriented Programming
+                  </h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
+          </div>
 
-        <div className='wd-dashboard-course'>
-          <img
-            src='/images/oop.jpg'
-            width={200}
-            alt='Object-Oriented Programming course'
-          />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/001/Home'
-            >
-              CS001 Object-Oriented Programming
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/001/Home'> Go </Link>
+          {/* Course 3 */}
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/002/Home'
+              >
+                <img
+                  src='/images/mobile.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='Mobile Dev'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS002 Mobile Development</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className='wd-dashboard-course'>
-          <img
-            src='/images/mobile.jpg'
-            width={200}
-            alt='Mobile Development course'
-          />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/002/Home'
-            >
-              CS002 Mobile development
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/002/Home'> Go </Link>
+
+          {/* Course 4 */}
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/003/Home'
+              >
+                <img
+                  src='/images/ml.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='Machine Learning'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS003 Machine Learning</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className='wd-dashboard-course'>
-          <img src='/images/ml.jpg' width={200} alt='Machine Learning course' />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/003/Home'
-            >
-              CS003 Machine Learning
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/003/Home'> Go </Link>
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/004/Home'
+              >
+                <img
+                  src='/images/ds.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='Data Science'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS004 Data Science</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className='wd-dashboard-course'>
-          <img src='/images/ds.jpg' width={200} alt='Data Science course' />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/004/Home'
-            >
-              CS004 Data Science
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/004/Home'> Go </Link>
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/005/Home'
+              >
+                <img
+                  src='/images/ds.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='Distributed Systems'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS005 Distributed Systems</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className='wd-dashboard-course'>
-          <img
-            src='/images/ds.jpg'
-            width={200}
-            alt='Distributed Systems course'
-          />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/005/Home'
-            >
-              CS005 Distributed Systems
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/005/Home'> Go </Link>
-          </div>
-        </div>
-        <div className='wd-dashboard-course'>
-          <img
-            src='/images/ds.jpg'
-            width={200}
-            alt='Computer Networks course'
-          />
-          <div>
-            <Link
-              className='wd-dashboard-course-link'
-              to='/Kanbas/Courses/006/Home'
-            >
-              CS006 Computer network
-            </Link>
-            <p className='wd-dashboard-course-title'>
-              Full Stack software developer
-            </p>
-            <Link to='/Kanbas/Courses/006/Home'> Go </Link>
+          <div className='col'>
+            <div className='card h-100'>
+              <Link
+                className='wd-dashboard-course-link'
+                to='/Kanbas/Courses/006/Home'
+              >
+                <img
+                  src='/images/ds.jpg'
+                  className='card-img-top img-fluid img-fixed'
+                  alt='Computer Networks'
+                />
+                <div className='card-body'>
+                  <h5 className='card-title'>CS006 Computer Networks</h5>
+                  <p className='card-text'>Full Stack software developer</p>
+                </div>
+              </Link>
+              <div className='card-footer'>
+                <button className='btn btn-primary'>Go</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
