@@ -1,9 +1,16 @@
 import { FaPlus } from 'react-icons/fa';
 import { BsGripVertical } from 'react-icons/bs';
+import { LiaBookSolid } from 'react-icons/lia';
 import LessonControlButtons from '../Modules/LessonControlButtons';
-import { LiaBookSolid} from 'react-icons/lia';
+import { useParams } from 'react-router';
+import * as db from '../../Database';
 
 export default function Assignments() {
+  const { courseId } = useParams(); 
+  const assignments = db.assignments.filter(
+    (assignment) => assignment.course === courseId
+  ); 
+
   return (
     <div id='wd-assignments' className='container mt-4'>
       {/* Top Bar with Search and Add Buttons */}
@@ -27,89 +34,50 @@ export default function Assignments() {
         </div>
       </div>
 
+      {/* Dynamic Assignment List */}
       <ul id='wd-assignments' className='list-group rounded-0'>
-        <li className='wd-assignment list-group-item p-0 mb-5 fs-5 border-gray'>
-          <div className='wd-title p-3 ps-2 bg-secondary'>
-            <BsGripVertical className='me-2 fs-3' />
-            ASSIGNMENTS
-          </div>
-          <ul className='wd-lessons list-group rounded-0'>
-            <li className='wd-lesson list-group-item p-3 ps-1 d-flex align-items-center'>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <BsGripVertical className='fs-3' />
-              </div>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <LiaBookSolid className='fs-3 text-success' />
-              </div>
+        <div className='wd-title p-3 ps-2 bg-secondary'>
+          <BsGripVertical className='me-2 fs-3' />
+          ASSIGNMENTS
+        </div>
+        {assignments.map((assignment) => (
+          <li
+            key={assignment._id}
+            className='wd-assignment list-group-item p-0 fs-5 border-gray'
+          >
+            <ul className='wd-lessons list-group rounded-0'>
+              <li className='wd-lesson list-group-item p-3 ps-1 d-flex align-items-center'>
+                <div className='d-flex flex-column justify-content-center me-3'>
+                  <BsGripVertical className='fs-3' />
+                </div>
+                <div className='d-flex flex-column justify-content-center me-3'>
+                  <LiaBookSolid className='fs-3 text-success' />
+                </div>
 
-              {/* Assignment 1 */}
-              <div className='flex-grow-1'>
-                <span className='assignment-content'>
-                  <a
-                    className='wd-assignment-link'
-                    href='#/Kanbas/Courses/1234/Assignments/123'
-                  >
-                    <strong>A1</strong>
-                  </a>
-                  <br />
-                  Multiple Modules | <strong>Not available until</strong> May 6
-                  at 12:00am
-                  <br />
-                  <strong>Due</strong> May 13 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className='d-flex flex-column justify-content-center'>
-                <LessonControlButtons />
-              </div>
-            </li>
-
-            {/* Assignments 2 */}
-            <li className='wd-lesson list-group-item p-3 ps-1 d-flex align-items-center'>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <BsGripVertical className='fs-3' />
-              </div>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <LiaBookSolid className='fs-3 text-success' />
-              </div>
-              <div className='flex-grow-1'>
-                <span className='assignment-content'>
-                  <strong>A2</strong>
-                  <br />
-                  Multiple Modules | <strong>Not available until</strong> May 13
-                  at 12:00am
-                  <br />
-                  <strong>Due</strong> May 20 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className='d-flex flex-column justify-content-center'>
-                <LessonControlButtons />
-              </div>
-            </li>
-
-            {/* Assignments 3 */}
-            <li className='wd-lesson list-group-item p-3 ps-1 d-flex align-items-center'>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <BsGripVertical className='fs-3' />
-              </div>
-              <div className='d-flex flex-column justify-content-center me-3'>
-                <LiaBookSolid className='fs-3 text-success' />
-              </div>
-              <div className='flex-grow-1'>
-                <span className='assignment-content'>
-                  <strong>A3</strong>
-                  <br />
-                  Multiple Modules | <strong>Not available until</strong> May 30
-                  at 12:00am
-                  <br />
-                  <strong>Due</strong> May 30 at 11:59pm | 100 pts
-                </span>
-              </div>
-              <div className='d-flex flex-column justify-content-center'>
-                <LessonControlButtons />
-              </div>
-            </li>
-          </ul>
-        </li>
+                {/* Assignment Details */}
+                <div className='flex-grow-1'>
+                  <span className='assignment-content'>
+                    <a
+                      className='wd-assignment-link'
+                      href={`#/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
+                    >
+                      <strong>{assignment.title}</strong>
+                    </a>
+                    <br />
+                    Multiple Modules | <strong>Not available until</strong>{' '}
+                    {assignment.startDate}
+                    <br />
+                    <strong>Due</strong> {assignment.dueDate} |{' '}
+                    {assignment.points} pts
+                  </span>
+                </div>
+                <div className='d-flex flex-column justify-content-center'>
+                  <LessonControlButtons />
+                </div>
+              </li>
+            </ul>
+          </li>
+        ))}
       </ul>
     </div>
   );
