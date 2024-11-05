@@ -1,5 +1,8 @@
 import Labs from "./Labs";
 import Kanbas from "./Kanbas";
+import store from "./Kanbas/store";
+import { Provider } from "react-redux";
+
 import { HashRouter, Route, Routes, Link} from 'react-router-dom';
 
 function Home() {
@@ -24,6 +27,7 @@ function Home() {
 export default function App() {
   return (
     <HashRouter>
+      <Provider store={store}>
       <div>
         <Link to="/Labs">Labs</Link> | <Link to="/Kanbas">Kanbas</Link>
         <Routes>
@@ -32,6 +36,7 @@ export default function App() {
           <Route path="/Kanbas/*" element={<Kanbas />} />
         </Routes>
       </div>
+      </Provider>
     </HashRouter>
   );
 }

@@ -1,12 +1,41 @@
-import { useParams, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addAssignment } from './reducer';
 import * as db from '../../Database';
 
 export default function AssignmentEditor() {
-  const { courseId } = useParams();
+  const { cid } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const assignment = db.assignments.find(
-    (assignment) => assignment.course === courseId
+  // Get assignment data if editing an existing assignment
+  const existingAssignment = db.assignments.find(
+    (assignment) => assignment.course === cid
   );
+
+  // Initialize state with assignment details if available, otherwise default values
+  const [assignment, setAssignment] = useState({
+    title: existingAssignment?.title || 'Untitled Assignment',
+    description: existingAssignment?.description || '',
+    points: existingAssignment?.points || 0,
+    dueDate: existingAssignment?.dueDate || '',
+    availableFromDate: existingAssignment?.startDate || '',
+    availableUntilDate: existingAssignment?.dueDate || ''
+  });
+
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setAssignment((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // Handle Save action
+  const handleSave = () => {
+    // Dispatch the addAssignment action with the current assignment data
+    dispatch(addAssignment({ ...assignment, course: cid }));
+    navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back to assignments screen
+  };
 
   return (
     <div id='wd-assignments-editor' className='container mt-4'>
@@ -17,7 +46,9 @@ export default function AssignmentEditor() {
         </label>
         <input
           id='wd-name'
-          defaultValue={assignment?.title || 'Untitled Assignment'}
+          name='title'
+          value={assignment.title}
+          onChange={handleChange}
           className='form-control'
         />
       </div>
@@ -26,16 +57,11 @@ export default function AssignmentEditor() {
       <div className='mb-4'>
         <textarea
           id='wd-description'
+          name='description'
           className='form-control'
           rows={8}
-          defaultValue={`The assignment is available online.\n
-Submit a link to the landing page of your Web application running on Netlify.\n
-The landing page should include the following:\n
-• Your full name and section\n
-• Links to each of the lab assignments\n
-• Link to the Kanbas application\n
-• Links to all relevant source code repositories\n
-The Kanbas application should include a link to navigate back to the landing page.`}
+          value={assignment.description}
+          onChange={handleChange}
         />
       </div>
 
@@ -48,8 +74,10 @@ The Kanbas application should include a link to navigate back to the landing pag
           <div className='col-md-9'>
             <input
               id='wd-points'
+              name='points'
               type='number'
-              defaultValue={assignment?.points || 0}
+              value={assignment.points}
+              onChange={handleChange}
               className='form-control'
             />
           </div>
@@ -85,8 +113,10 @@ The Kanbas application should include a link to navigate back to the landing pag
                   </label>
                   <input
                     id='wd-available-from'
+                    name='availableFromDate'
                     type='date'
-                    defaultValue={assignment?.startDate || ''}
+                    value={assignment.availableFromDate}
+                    onChange={handleChange}
                     className='form-control'
                   />
                 </div>
@@ -96,8 +126,10 @@ The Kanbas application should include a link to navigate back to the landing pag
                   </label>
                   <input
                     id='wd-available-until'
+                    name='availableUntilDate'
                     type='date'
-                    defaultValue='2024-05-20'
+                    value={assignment.availableUntilDate}
+                    onChange={handleChange}
                     className='form-control'
                   />
                 </div>
@@ -107,8 +139,10 @@ The Kanbas application should include a link to navigate back to the landing pag
                   </label>
                   <input
                     id='wd-due-date'
+                    name='dueDate'
                     type='date'
-                    defaultValue={assignment?.dueDate || ''}
+                    value={assignment.dueDate}
+                    onChange={handleChange}
                     className='form-control'
                   />
                 </div>
@@ -120,19 +154,21 @@ The Kanbas application should include a link to navigate back to the landing pag
 
       {/* Buttons */}
       <div className='text-end'>
-        <Link
-          to={`/Kanbas/Courses/${courseId}/Assignments`}
+        <button
+          onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}
           className='btn btn-secondary me-2'
         >
           Cancel
-        </Link>
-        <Link
-          to={`/Kanbas/Courses/${courseId}/Assignments`}
+        </button>
+        <button
+          onClick={handleSave}
           className='btn btn-success'
         >
           Save
-        </Link>
+        </button>
       </div>
     </div>
   );
 }
+
+
