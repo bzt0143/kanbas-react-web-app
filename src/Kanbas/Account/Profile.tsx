@@ -3,16 +3,25 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
 import { useCallback } from "react";
+import * as client from "./client";
+
 export default function Profile() {
   const [profile, setProfile] = useState<any>({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const updateProfile = async () => {
+    const updatedProfile = await client.updateUser(profile);
+    dispatch(setCurrentUser(updatedProfile));
+  };
+
   const fetchProfile = useCallback(() => {
     if (!currentUser) return navigate("/Kanbas/Account/Signin");
     setProfile(currentUser);
   }, [currentUser, navigate]); 
-  const signout = () => {
+  
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     navigate("/Kanbas/Account/Signin");
   };
@@ -24,6 +33,7 @@ export default function Profile() {
       <h3>Profile</h3>
       {profile && (
         <div>
+          <button onClick={updateProfile} className="btn btn-primary w-100 mb-2"> Update </button>
           <input defaultValue={profile.username} id="wd-username" className="form-control mb-2"
                  onChange={(e) => setProfile({ ...profile, username:  e.target.value })}/>
           <input defaultValue={profile.password} id="wd-password" className="form-control mb-2"
