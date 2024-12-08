@@ -9,13 +9,17 @@ export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const signin = async () => {
+    console.log("Credentials being sent:", credentials); 
     const user =  await client.signin(credentials);
     if (!user) return;
     dispatch(setCurrentUser(user));
     navigate("/Kanbas/Dashboard");
   };
+  
 
   return (
+    
+
     <div id="wd-signin-screen">
       <h1>Sign in</h1>
       <input defaultValue={credentials.username}
@@ -26,5 +30,6 @@ export default function Signin() {
              className="form-control mb-2" placeholder="password" type="password" id="wd-password" />
       <button onClick={signin} id="wd-signin-btn" className="btn btn-primary w-100" > Sign in </button>
       <Link id="wd-signup-link" to="/Kanbas/Account/Signup"> Sign up </Link>
+      
     </div>
 );}
